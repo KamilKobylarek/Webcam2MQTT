@@ -30,3 +30,14 @@
     $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Settings $Settings
     Register-ScheduledTask -TaskName 'Webcam2MQTT' -InputObject $Task
     ````
+## To create Binary sensor in HA just use this code:
+ `````
+ binary_sensor:
+   - platform: mqtt
+    name: "MyPC Webcam"
+    state_topic: "MyPC/Webcam"
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: "safety"
+    force_update: true
+ 
