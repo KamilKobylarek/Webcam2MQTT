@@ -1,2 +1,27 @@
 # Webcam2MQTT
 Use powershell to send via MQTT your webcam status (on/off)
+# Webcam2MQTT
+
+## How to install
+
+1. Run this in PowerShell(Admin)
+
+    invoke-WebRequest "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -OutFile "C:\Windows\nuget.exe"  
+    nuget sources add -Name "nuget.org" -Source "https://api.nuget.org/v3/index.json"
+    nuget install M2Mqtt -o c:\lib
+
+2. Copy Webcam2MQTT.ps1 somewhere to your Windows
+3. Edit first 4 lines and save
+
+    $topic= "MyPC/Webcam"
+    $mqtthost = "mqtt.example.com"
+    $mqttLogin = "MQTTLogin"
+    $mqttPass= "MQTTPass"
+
+4. Create a Task to startup srcipt at logon. You can use PowerShell to do this
+
+    $Action = New-ScheduledTaskAction -Execute 'pwsh.exe' -Argument '-WindowStyle Hidden -file "C:\Webcam2MQTT.ps1" -ExecutionPolicy Bypass -WindowStyle Hidden -noProfile -noInteractive'
+    $Trigger = New-ScheduledTaskTrigger -AtLogon -User $env:UserName
+    $Settings = New-ScheduledTaskSettingsSet
+    $Task = New-ScheduledTask -Action $Action -Trigger $Trigger -Settings $Settings
+    Register-ScheduledTask -TaskName 'Webcam2MQTT' -InputObject $Task
