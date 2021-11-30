@@ -1,6 +1,5 @@
 # Webcam2MQTT
 Use powershell to send via MQTT your webcam status (on/off)
-# Webcam2MQTT
 
 ## How to install
 
@@ -10,7 +9,7 @@ Use powershell to send via MQTT your webcam status (on/off)
     nuget sources add -Name "nuget.org" -Source "https://api.nuget.org/v3/index.json"
     nuget install M2Mqtt -o c:\lib
 
-2. Copy Webcam2MQTT.ps1 somewhere to your Windows
+2. Copy Webcam2MQTT.ps1 to C:\
 3. Edit first 4 lines and save
 
     $topic= "MyPC/Webcam"
